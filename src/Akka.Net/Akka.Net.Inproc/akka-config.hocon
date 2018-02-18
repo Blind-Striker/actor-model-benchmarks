@@ -1,0 +1,24 @@
+﻿akka {
+	loglevel = ERROR
+
+    bounded-mailbox {
+		mailbox-capacity = 2048
+		# mailbox-push-timeout-time = 10s
+		mailbox-type = "Akka.Dispatch.BoundedMailbox, Akka"
+	}
+
+	custom-fork-join-dispatcher {
+		type = "ForkJoinDispatcher"
+		throughput = 100
+		dedicated-thread-pool {
+			thread-count = 8
+			deadlock-timeout = 3s
+			threadtype = background
+		}
+	}
+
+	custom-dispatcher {
+	  type = "Dispatcher"
+	  throughput = 100
+	}
+}

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ActorModelBenchmarks.ProtoActor.Pi.Node1</AssemblyName>
+    <RootNamespace>ActorModelBenchmarks.ProtoActor.Pi.Node1</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Proto.Actor" Version="0.1.16" />
+    <PackageReference Include="Proto.Remote" Version="0.1.16" />
+    <PackageReference Include="Proto.Router" Version="0.1.16" />
+    <PackageReference Include="Proto.Serialization.Wire" Version="0.1.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProtoActor.Pi.Actors\ProtoActor.Pi.Actors.csproj" />
+  </ItemGroup>
+
+</Project>

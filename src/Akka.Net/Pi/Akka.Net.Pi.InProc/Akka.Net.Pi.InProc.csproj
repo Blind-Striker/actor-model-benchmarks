@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ActorModelBenchmarks.Akka.Net.Pi.InProc</AssemblyName>
+    <RootNamespace>ActorModelBenchmarks.Akka.Net.Pi.InProc</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka" Version="1.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
+    <ProjectReference Include="..\Akka.Net.Pi.Actors\Akka.Net.Pi.Actors.csproj" />
+  </ItemGroup>
+
+</Project>

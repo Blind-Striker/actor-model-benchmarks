@@ -1,0 +1,41 @@
+﻿akka {
+	# here we are configuring log levels
+	log-config-on-start = off
+	# stdout-loglevel = INFO
+	loglevel = ERROR
+	# this config section will be referenced as akka.actor
+
+	actor {
+		provider = remote
+		debug {
+			receive = off
+			autoreceive = off
+			lifecycle = off
+			event-stream = off
+			unhandled = off
+		}
+                						
+		serializers {
+			hyperion = "Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion"
+		}
+
+		serialization-bindings {
+			"System.Object" = hyperion
+		}
+	}
+  
+	remote {							
+		log-remote-lifecycle-events = ERROR
+		log-received-messages = off
+		
+		dot-netty.tcp {
+			transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport,Akka.Remote"
+			applied-adapters = []
+			transport-protocol = tcp
+			#will be populated with a dynamic host-name at runtime if left uncommented
+			#public-hostname = "POPULATE STATIC IP HERE"
+			hostname = "127.0.0.1"
+			port = 8090
+		}
+	}
+}

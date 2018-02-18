@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ActorModelBenchmarks.Akka.Net.Pi.Node2</AssemblyName>
+    <RootNamespace>ActorModelBenchmarks.Akka.Net.Pi.Node2</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka.Remote" Version="1.3.4" />
+    <PackageReference Include="Akka.Serialization.Hyperion" Version="1.3.4-beta58" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Akka.Net.Pi.Actors\Akka.Net.Pi.Actors.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="akka-config.hocon">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

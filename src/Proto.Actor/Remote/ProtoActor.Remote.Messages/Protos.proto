@@ -1,0 +1,11 @@
+syntax = "proto3";
+package messages;
+option csharp_namespace = "ProtoActor.Remote.Messages";
+import "Proto.Actor.proto";
+
+message Start {}
+message StartRemote {
+    actor.PID Sender = 1;
+}
+message Ping {}
+message Pong {}

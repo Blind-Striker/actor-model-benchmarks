@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <AssemblyName>ActorModelBenchmarks.ProtoActor.Remote.Messages</AssemblyName>
+    <RootNamespace>ActorModelBenchmarks.ProtoActor.Remote.Messages</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="build.bat" />
+    <None Include="Protos.proto" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.4.1" />
+    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+    <PackageReference Include="Proto.Actor" Version="0.1.16" />
+  </ItemGroup>
+</Project>

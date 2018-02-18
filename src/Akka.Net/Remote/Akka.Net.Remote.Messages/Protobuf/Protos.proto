@@ -1,0 +1,10 @@
+syntax = "proto3";
+package messages;
+option csharp_namespace = "Akka.Net.Messages.Protobuf";
+
+message ProtoStart {}
+message ProtoRemote {
+    string SenderAddress = 1;
+}
+message ProtoPing {}
+message ProtoPong {}

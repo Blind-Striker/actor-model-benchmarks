@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ActorModelBenchmarks.ProtoActor.Remote.Node2</AssemblyName>
+    <RootNamespace>ActorModelBenchmarks.ProtoActor.Remote.Node2</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Proto.Remote" Version="0.1.16" />
+    <PackageReference Include="Proto.Serialization.Wire" Version="0.1.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProtoActor.Remote.Messages\ProtoActor.Remote.Messages.csproj" />
+  </ItemGroup>
+
+</Project>
