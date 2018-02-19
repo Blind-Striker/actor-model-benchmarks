@@ -14,6 +14,6 @@ Creates receive and echo actors as many as the number of cores, maps them to eac
 
 There are two kinds of ping pong benchmark and both of them have both in process and remote benchmarks. The benchmark named InProc is adapted from Proto.Actor repository and PingPong is adepted from Akka.Net repository.
 
-## Ping Calculation Benchmark
+## Pi Calculation Benchmark
 Like the ping pong benchmark, actors and n number of messages are created. Actors calculates pi number as many as messages and send it back. It is aimed to simulate real world scenarios by making a calculation in Actors. There are both in process and remote benchmark examples.
 
