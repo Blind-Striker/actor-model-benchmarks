@@ -13,6 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\.settings\benchmark-settings.json">
+      <Link>benchmark-settings.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
     <ProjectReference Include="..\ProtoActor.Pi.Actors\ProtoActor.Pi.Actors.csproj" />
   </ItemGroup>

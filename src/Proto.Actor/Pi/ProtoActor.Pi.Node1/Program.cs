@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
 using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
 using Proto.Serialization.Wire;
@@ -16,10 +17,13 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
     {
         private static void Main(string[] args)
         {
+            var benchmarkSettings = Configuration.GetConfiguration<PiBenchmarkSettings>("PiBenchmarkSettings");
+
             var processorCount = Environment.ProcessorCount;
-            var calculationCount = 200_000;
-            var piDigit = 1000;
-            var piIteration = 10;
+            var calculationCount = benchmarkSettings.CalculationCount;
+            var piDigit = benchmarkSettings.PiDigit;
+            var piIteration = benchmarkSettings.PiIteration;
+            var node2Address = $"{benchmarkSettings.Node2Ip}:{benchmarkSettings.Node2Port}";
 
             //Registering "knownTypes" is not required, but improves performance as those messages
             //do not need to pass any typename manifest
@@ -32,13 +36,13 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
             });
             Serialization.RegisterSerializer(wire, true);
 
-            Remote.Start("127.0.0.1", 12000);
+            Remote.Start(benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port);
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
             var echoProps = Actor.FromProducer(() => new EchoActor(calculationCount, taskCompletionSource));
 
-            var piActors = new PID("127.0.0.1:12001", "piActors");
-            var starterActor = new PID("127.0.0.1:12001", "starterActor");
+            var piActors = new PID(node2Address, "piActors");
+            var starterActor = new PID(node2Address, "starterActor");
             var echoActor = Actor.Spawn(echoProps);
 
             WriteBenchmarkInfo(processorCount, calculationCount);

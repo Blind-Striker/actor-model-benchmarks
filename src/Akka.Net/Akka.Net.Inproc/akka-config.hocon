@@ -1,7 +1,7 @@
 ﻿akka {
 	loglevel = ERROR
 
-    bounded-mailbox {
+	bounded-mailbox {
 		mailbox-capacity = 2048
 		# mailbox-push-timeout-time = 10s
 		mailbox-type = "Akka.Dispatch.BoundedMailbox, Akka"

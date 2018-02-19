@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.Akka.Net.Pi.Actors;
 using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
+using Akka.Configuration;
 using Akka.Routing;
 
 namespace ActorModelBenchmarks.Akka.Net.Pi.InProc
 {
-    internal class Program
+    internal partial class Program
     {
         private static void Main(string[] args)
         {
-            var actorSystem = ActorSystem.Create("PiCalcSys");
+            PiBenchmarkSettings benchmarkSettings = Configuration.GetConfiguration<PiBenchmarkSettings>("PiBenchmarkSettings");
+            var config = ConfigurationFactory.ParseString(File.ReadAllText("akka-config.hocon"));
+
+            var actorSystem = ActorSystem.Create("PiCalcSys", config);
+
             var processorCount = Environment.ProcessorCount;
-            var calculationCount = 200_000;
-            var piDigit = 1000;
-            var piIteration = 10;
+            var calculationCount = benchmarkSettings.CalculationCount;
+            var piDigit = benchmarkSettings.PiDigit;
+            var piIteration = benchmarkSettings.PiIteration;
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
 
@@ -39,6 +46,7 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.InProc
             {
                 piActors.Tell(options);
             }
+
             Task.WaitAll(tasks);
             sw.Stop();
 
@@ -66,6 +74,7 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.InProc
                 miliSecs[i] = sw1.ElapsedMilliseconds;
                 sw1.Reset();
             }
+
             var average = miliSecs.Average();
             Console.WriteLine("Pi digit\t\tPi Iteration\t\tAvgCalc Milliseconds");
             Console.WriteLine($"{piDigit}\t\t\t{piIteration}\t\t\t{average}");

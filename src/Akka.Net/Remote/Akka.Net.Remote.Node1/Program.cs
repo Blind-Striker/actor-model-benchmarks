@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading;
 using ActorModelBenchmarks.Akka.Net.Remote.Messages;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
 using Akka.Configuration;
 
@@ -16,16 +18,22 @@ namespace ActorModelBenchmarks.Akka.Net.Remote.Node1
     {
         private static void Main(string[] args)
         {
+            var benchmarkSettings = Configuration.GetConfiguration<RemoteBenchmarkSettings>("RemoteBenchmarkSettings");
             var config = ConfigurationFactory.ParseString(File.ReadAllText("akka-config.hocon"));
+
+            string node1Ip = benchmarkSettings.Node1Ip;
+            string node2Ip = benchmarkSettings.Node2Ip;
+            int node1Port = benchmarkSettings.Node1Port;
+            int node2Port = benchmarkSettings.Node2Port;
 
             var actorSystem = ActorSystem.Create("remote-sys", config);
 
-            var messageCount = 100_000;
+            var messageCount = benchmarkSettings.MessageCount;
             var wg = new AutoResetEvent(false);
             var actorRef = actorSystem.ActorOf(Props.Create(() => new LocalActor(0, messageCount, wg)));
-            var remoteActor = actorSystem.ActorSelection("akka.tcp://remote-sys@127.0.0.1:8091/user/remote");
+            var remoteActor = actorSystem.ActorSelection($"akka.tcp://remote-sys@{node2Ip}:{node2Port}/user/remote");
 
-            var address = actorRef.Path.ToStringWithAddress(new Address("akka.tcp", "remote-sys", "127.0.0.1", 8090));
+            var address = actorRef.Path.ToStringWithAddress(new Address("akka.tcp", "remote-sys", node1Ip, node1Port));
 
             remoteActor.Ask<Start>(new StartRemote {SenderAddress = address}).Wait();
 
@@ -62,14 +70,22 @@ namespace ActorModelBenchmarks.Akka.Net.Remote.Node1
 
         protected override void OnReceive(object message)
         {
-            if (!(message is Pong pong))
+            if (!(message is Pong))
+            {
                 return;
+            }
 
             _count++;
+
             if (_count % 5000 == 0)
+            {
                 Console.WriteLine(_count);
+            }
+
             if (_count == _messageCount)
+            {
                 _wg.Set();
+            }
         }
     }
 }

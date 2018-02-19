@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime;
 using System.Threading;
 using System.Threading.Tasks;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Mailbox;
 
@@ -14,14 +16,14 @@ namespace ActorModelBenchmarks.ProtoActor.Inproc
     {
         private static void Main(string[] args)
         {
+            var benchmarkSettings = Configuration.GetConfiguration<InprocBenchmarkSettings>("InprocBenchmarkSettings");
+
             Console.WriteLine($"Is Server GC {GCSettings.IsServerGC}");
-            const int messageCount = 1000000;
-            const int batchSize = 100;
+            int messageCount = benchmarkSettings.MessageCount;
+            int batchSize = benchmarkSettings.BatchSize;
 
             Console.WriteLine("Dispatcher\t\tElapsed\t\tMsg/sec");
-            var tps = new[] {100, 200, 300, 400, 500, 600, 700, 800, 900};
-            //var tps = new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 };
-            //var tps = new[] { 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
+            var tps = benchmarkSettings.Throughputs;
 
             var msgSecs = new List<int>();
             foreach (var t in tps)

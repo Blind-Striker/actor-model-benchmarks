@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.Akka.Net.Pi.Actors;
 using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
 using Akka.Configuration;
 
@@ -15,19 +16,21 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.Node1
     {
         private static void Main(string[] args)
         {
-            var processorCount = Environment.ProcessorCount;
-            var calculationCount = 200_000;
-            var piDigit = 1000;
-            var piIteration = 10;
-
+            var benchmarkSettings = Configuration.GetConfiguration<PiBenchmarkSettings>("PiBenchmarkSettings");
             var config = ConfigurationFactory.ParseString(File.ReadAllText("akka-config.hocon"));
+
+            var processorCount = Environment.ProcessorCount;
+            var calculationCount = benchmarkSettings.CalculationCount;
+            var piDigit = benchmarkSettings.PiDigit;
+            var piIteration = benchmarkSettings.PiIteration;
+            var node2Address = $"{benchmarkSettings.Node2Ip}:{benchmarkSettings.Node2Port}";
 
             var actorSystem = ActorSystem.Create("remote-sys", config);
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
             var echoActor = actorSystem.ActorOf(Props.Create(() => new EchoActor(calculationCount, taskCompletionSource)));
-            var piActors = actorSystem.ActorSelection("akka.tcp://remote-sys@127.0.0.1:8091/user/piActors");
-            var starterActor = actorSystem.ActorSelection("akka.tcp://remote-sys@127.0.0.1:8091/user/starterActor");
+            var piActors = actorSystem.ActorSelection($"akka.tcp://remote-sys@{node2Address}/user/piActors");
+            var starterActor = actorSystem.ActorSelection($"akka.tcp://remote-sys@{node2Address}/user/starterActor");
 
             WriteBenchmarkInfo(processorCount, calculationCount);
             Console.WriteLine();

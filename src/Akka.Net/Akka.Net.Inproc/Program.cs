@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime;
 using System.Threading;
 using System.Threading.Tasks;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
 using Akka.Configuration;
 using Akka.Util.Internal;
@@ -17,20 +19,17 @@ namespace ActorModelBenchmarks.Akka.Net.Inproc
         private static void Main(string[] args)
         {
             Console.WriteLine($"Is Server GC {GCSettings.IsServerGC}");
+            var benchmarkSettings = Configuration.GetConfiguration<InprocBenchmarkSettings>("InprocBenchmarkSettings");
 
             var config = ConfigurationFactory.ParseString(File.ReadAllText("akka-config.hocon"));
             var mainSystem = ActorSystem.Create("main", config);
 
-            const int messageCount = 1_000_000;
-            const int batchSize = 100;
-            //string dispatcherType = "akka.custom-fork-join-dispatcher";
-            var dispatcherType = "akka.custom-dispatcher";
-
+            int messageCount = benchmarkSettings.MessageCount;
+            int batchSize = benchmarkSettings.BatchSize;
+            var dispatcherType = benchmarkSettings.AkkaDispatcherType;
 
             Console.WriteLine("Dispatcher\t\tElapsed\t\tMsg/sec");
-            var tps = new[] {100, 200, 300, 400, 500, 600, 700, 800, 900};
-            //var tps = new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 };
-            //var tps = new[] { 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
+            var tps = benchmarkSettings.Throughputs;
 
             var msgSecs = new List<int>();
             foreach (var t in tps)

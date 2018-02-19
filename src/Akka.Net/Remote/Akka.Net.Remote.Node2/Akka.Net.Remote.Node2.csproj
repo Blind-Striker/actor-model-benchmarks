@@ -17,6 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\.settings\benchmark-settings.json">
+      <Link>benchmark-settings.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="akka-config.hocon">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -2,6 +2,8 @@
 using System.Numerics;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
 using Proto.Router;
@@ -13,6 +15,8 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node2
     {
         private static void Main(string[] args)
         {
+            var benchmarkSettings = Configuration.GetConfiguration<PiBenchmarkSettings>("PiBenchmarkSettings");
+
             var processorCount = Environment.ProcessorCount;
 
             //Registering "knownTypes" is not required, but improves performance as those messages
@@ -26,7 +30,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node2
             });
             Serialization.RegisterSerializer(wire, true);
 
-            Remote.Start("127.0.0.1", 12001);
+            Remote.Start(benchmarkSettings.Node2Ip, benchmarkSettings.Node2Port);
 
             var piCalcProps = Router.NewRoundRobinPool(Actor.FromProducer(() => new PiCalculatorActor()), processorCount);
             var starterActorProps = Actor.FromProducer(() => new StarterActor());

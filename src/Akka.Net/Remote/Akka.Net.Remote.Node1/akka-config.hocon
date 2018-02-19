@@ -14,7 +14,7 @@
 			event-stream = off
 			unhandled = off
 		}
-                						
+										
 		serializers {
 			hyperion = "Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion"
 		}

@@ -1,0 +1,17 @@
+﻿akka {
+	# here we are configuring log levels
+	log-config-on-start = off
+	# stdout-loglevel = INFO
+	loglevel = ERROR
+	# this config section will be referenced as akka.actor
+
+	actor {
+		debug {
+			receive = off
+			autoreceive = off
+			lifecycle = off
+			event-stream = off
+			unhandled = off
+		}									
+	}
+}

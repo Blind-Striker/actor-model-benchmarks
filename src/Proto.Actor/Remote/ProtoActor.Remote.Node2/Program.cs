@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Remote.Messages;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
 using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection;
 
 namespace ActorModelBenchmarks.ProtoActor.Remote.Node2
 {
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            var benchmarkSettings = Configuration.GetConfiguration<RemoteBenchmarkSettings>("RemoteBenchmarkSettings");
+
+            Serialization.RegisterFileDescriptor(ProtosReflection.Descriptor);
+            Proto.Remote.Remote.Start(benchmarkSettings.Node2Ip, benchmarkSettings.Node2Port);
+            Actor.SpawnNamed(Actor.FromProducer(() => new EchoActor()), "remote");
+            Console.ReadLine();
+        }
+    }
+
     public class EchoActor : IActor
     {
         private PID _sender;
@@ -26,17 +41,6 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node2
                 default:
                     return Actor.Done;
             }
-        }
-    }
-
-    internal class Program
-    {
-        private static void Main(string[] args)
-        {
-            Serialization.RegisterFileDescriptor(ProtosReflection.Descriptor);
-            Proto.Remote.Remote.Start("127.0.0.1", 12000);
-            Actor.SpawnNamed(Actor.FromProducer(() => new EchoActor()), "remote");
-            Console.ReadLine();
         }
     }
 }

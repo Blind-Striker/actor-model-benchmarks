@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
 using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Router;
 
@@ -14,10 +15,12 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.InProc
     {
         private static void Main(string[] args)
         {
+            PiBenchmarkSettings benchmarkSettings = Configuration.GetConfiguration<PiBenchmarkSettings>("PiBenchmarkSettings");
+
             var processorCount = Environment.ProcessorCount;
-            var calculationCount = 200_000;
-            var piDigit = 1000;
-            var piIteration = 10;
+            var calculationCount = benchmarkSettings.CalculationCount;
+            var piDigit = benchmarkSettings.PiDigit;
+            var piIteration = benchmarkSettings.PiIteration;
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
 

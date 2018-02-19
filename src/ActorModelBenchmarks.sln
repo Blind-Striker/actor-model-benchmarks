@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Akka.Net", "Akka.Net", "{DA88433E-C14A-4038-BA2F-24BB4965D029}"
 EndProject
@@ -56,6 +56,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActor.Remote.Node1", "Proto.Actor\Remote\ProtoActor.Remote.Node1\ProtoActor.Remote.Node1.csproj", "{3F243A9E-1A9A-4899-B2E3-0334D3B27F47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActor.Remote.Node2", "Proto.Actor\Remote\ProtoActor.Remote.Node2\ProtoActor.Remote.Node2.csproj", "{5D201DA0-A518-4CE8-8E82-762CBB2304A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".settings", ".settings", "{1FB574D9-3C16-4CDE-97B8-F61DD30F6F12}"
+	ProjectSection(SolutionItems) = preProject
+		.settings\benchmark-settings.json = .settings\benchmark-settings.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

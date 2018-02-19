@@ -13,7 +13,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
     <ProjectReference Include="..\Akka.Net.Pi.Actors\Akka.Net.Pi.Actors.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\.settings\benchmark-settings.json">
+      <Link>benchmark-settings.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

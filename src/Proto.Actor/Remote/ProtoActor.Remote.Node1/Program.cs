@@ -2,6 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Remote.Messages;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
 using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection;
@@ -12,15 +14,17 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
     {
         private static void Main(string[] args)
         {
-            Serialization.RegisterFileDescriptor(ProtosReflection.Descriptor);
-            Proto.Remote.Remote.Start("127.0.0.1", 12001);
+            var benchmarkSettings = Configuration.GetConfiguration<RemoteBenchmarkSettings>("RemoteBenchmarkSettings");
 
-            var messageCount = 100000;
+            Serialization.RegisterFileDescriptor(ProtosReflection.Descriptor);
+            Proto.Remote.Remote.Start(benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port);
+
+            var messageCount = benchmarkSettings.MessageCount;
             var wg = new AutoResetEvent(false);
             var props = Actor.FromProducer(() => new LocalActor(0, messageCount, wg));
 
             var pid = Actor.Spawn(props);
-            var remote = new PID("127.0.0.1:12000", "remote");
+            var remote = new PID($"{benchmarkSettings.Node2Ip}:{benchmarkSettings.Node2Port}", "remote");
             remote.RequestAsync<Start>(new StartRemote {Sender = pid}).Wait();
 
             var start = DateTime.Now;
@@ -61,9 +65,14 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
                     case Pong _:
                         _count++;
                         if (_count % 5000 == 0)
+                        {
                             Console.WriteLine(_count);
+                        }
+
                         if (_count == _messageCount)
+                        {
                             _wg.Set();
+                        }
                         break;
                 }
                 return Actor.Done;
