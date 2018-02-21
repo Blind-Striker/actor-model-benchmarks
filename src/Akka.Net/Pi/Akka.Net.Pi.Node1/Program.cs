@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.Akka.Net.Pi.Actors;
+using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
@@ -39,7 +40,7 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.Node1
 
             starterActor.Ask<Start>(new StartRemote()).Wait();
 
-            var options = new PiCalculatorActor.CalcOptions(piDigit, piIteration, echoActor);
+            var options = new CalcOptions(piDigit, piIteration, echoActor);
 
             Console.WriteLine("Routee\t\t\tElapsed\t\tMsg/sec");
             var tasks = taskCompletionSource.Task;

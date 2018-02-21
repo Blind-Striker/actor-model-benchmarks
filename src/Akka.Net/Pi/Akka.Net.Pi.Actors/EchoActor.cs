@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
 using Akka.Actor;
 
 namespace ActorModelBenchmarks.Akka.Net.Pi.Actors
@@ -16,7 +17,7 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.Actors
 
         protected override void OnReceive(object message)
         {
-            if (message is PiCalculatorActor.PiNumber)
+            if (message is PiNumber)
             {
                 _calculationCount--;
 

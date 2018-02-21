@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf;
+using ActorModelBenchmarks.ProtoActor.Remote.Messages;
+//using ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
-using Ping = ActorModelBenchmarks.ProtoActor.Remote.Messages.Ping;
-using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection;
+using Proto.Serialization.Wire;
 
 namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
 {
@@ -17,10 +17,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
         {
             var benchmarkSettings = Configuration.GetConfiguration<RemoteBenchmarkSettings>("RemoteBenchmarkSettings");
 
-            string node1Ip = benchmarkSettings.Node1Ip;
-            int node1Port = benchmarkSettings.Node1Port;
-
-            Serialization.RegisterFileDescriptor(ProtosReflection.Descriptor);
+            SwitchToWire();
             Proto.Remote.Remote.Start(benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port);
 
             var messageCount = benchmarkSettings.MessageCount;
@@ -29,7 +26,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
 
             var pid = Actor.SpawnNamed(props, "local");
             var remote = new PID($"{benchmarkSettings.Node2Ip}:{benchmarkSettings.Node2Port}", "remote");
-            remote.RequestAsync<Start>(new StartRemote {SenderAddress = $"{node1Ip}:{node1Port}" }).Wait();
+            remote.RequestAsync<Start>(new StartRemote {SenderAddress = pid.Address }).Wait();
 
             var start = DateTime.Now;
             Console.WriteLine("Starting to send");
@@ -48,39 +45,57 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
             Console.ReadLine();
         }
 
-        public class LocalActor : IActor
+        private static void SwitchToWire()
         {
-            private readonly int _messageCount;
-            private readonly AutoResetEvent _wg;
-            private int _count;
-
-            public LocalActor(int count, int messageCount, AutoResetEvent wg)
+            //Registering "knownTypes" is not required, but improves performance as those messages
+            //do not need to pass any typename manifest
+            var wire = new WireSerializer(new[]
             {
-                _count = count;
-                _messageCount = messageCount;
-                _wg = wg;
-            }
+                typeof(Ping),
+                typeof(Pong),
+                typeof(StartRemote),
+                typeof(Start)
+            });
+            Serialization.RegisterSerializer(wire, true);
+        }
 
+        private static void SwitchToProtobuf()
+        {
+            Serialization.RegisterFileDescriptor(Messages.Protobuf.ProtosReflection.Descriptor);
+        }
+    }
 
-            public Task ReceiveAsync(IContext context)
+    public class LocalActor : IActor
+    {
+        private readonly int _messageCount;
+        private readonly AutoResetEvent _wg;
+        private int _count;
+
+        public LocalActor(int count, int messageCount, AutoResetEvent wg)
+        {
+            _count = count;
+            _messageCount = messageCount;
+            _wg = wg;
+        }
+
+        public Task ReceiveAsync(IContext context)
+        {
+            switch (context.Message)
             {
-                switch (context.Message)
-                {
-                    case Pong _:
-                        _count++;
-                        if (_count % 5000 == 0)
-                        {
-                            Console.WriteLine(_count);
-                        }
+                case Pong _:
+                    _count++;
+                    if (_count % 5000 == 0)
+                    {
+                        Console.WriteLine(_count);
+                    }
 
-                        if (_count == _messageCount)
-                        {
-                            _wg.Set();
-                        }
-                        break;
-                }
-                return Actor.Done;
+                    if (_count == _messageCount)
+                    {
+                        _wg.Set();
+                    }
+                    break;
             }
+            return Actor.Done;
         }
     }
 }

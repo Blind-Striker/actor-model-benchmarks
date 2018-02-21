@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
+//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
+using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
 using ActorModelBenchmarks.Utils;
 using Proto;
 
 namespace ActorModelBenchmarks.ProtoActor.Pi.Actors
 {
-    public class PiCalculatorActor : IActor
+    public partial class PiCalculatorActor : IActor
     {
         public Task ReceiveAsync(IContext context)
         {
@@ -15,36 +17,12 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors
 
                 var strPi = pi.ToString();
 
-                options.Receiver?.Tell(new PiNumber(strPi));
+                PID echoActor = new PID(options.ReceiverAddress, "echoActor");
+
+                echoActor.Tell(new PiNumber {Pi = strPi});
             }
 
             return Actor.Done;
-        }
-
-        public class CalcOptions
-        {
-            public CalcOptions(int digits, int iterations, PID receiver = null)
-            {
-                Digits = digits;
-                Iterations = iterations;
-                Receiver = receiver;
-            }
-
-            public int Digits { get; }
-
-            public int Iterations { get; }
-
-            public PID Receiver { get; }
-        }
-
-        public class PiNumber
-        {
-            public PiNumber(string pi)
-            {
-                Pi = pi;
-            }
-
-            public string Pi { get; }
         }
     }
 }

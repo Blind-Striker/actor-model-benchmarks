@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf;
+//using ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf;
+using ActorModelBenchmarks.ProtoActor.Remote.Messages;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
-using Ping = ActorModelBenchmarks.ProtoActor.Remote.Messages.Ping;
-using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection;
+using Proto.Serialization.Wire;
 
 namespace ActorModelBenchmarks.ProtoActor.Remote.Node2
 {
@@ -16,10 +16,29 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node2
         {
             var benchmarkSettings = Configuration.GetConfiguration<RemoteBenchmarkSettings>("RemoteBenchmarkSettings");
 
-            Serialization.RegisterFileDescriptor(ProtosReflection.Descriptor);
+            SwitchToWire();
             Proto.Remote.Remote.Start(benchmarkSettings.Node2Ip, benchmarkSettings.Node2Port);
             Actor.SpawnNamed(Actor.FromProducer(() => new EchoActor()), "remote");
             Console.ReadLine();
+        }
+
+        private static void SwitchToWire()
+        {
+            //Registering "knownTypes" is not required, but improves performance as those messages
+            //do not need to pass any typename manifest
+            var wire = new WireSerializer(new[]
+            {
+                typeof(Ping),
+                typeof(Pong),
+                typeof(StartRemote),
+                typeof(Start)
+            });
+            Serialization.RegisterSerializer(wire, true);
+        }
+
+        private static void SwitchToProtobuf()
+        {
+            Serialization.RegisterFileDescriptor(Messages.Protobuf.ProtosReflection.Descriptor);
         }
     }
 

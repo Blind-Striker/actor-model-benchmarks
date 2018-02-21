@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.4.0" />
+    <PackageReference Include="Grpc.Tools" Version="1.0.1" />
     <PackageReference Include="Proto.Actor" Version="0.1.16" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="%userprofile%\.nuget\packages\google.protobuf.tools\3.4.0\tools\windows_x64\protoc.exe -I=&quot;$(ProjectDir)Messages\Protobuf&quot; --csharp_out=&quot;$(ProjectDir)Messages\Protobuf&quot; &quot;$(ProjectDir)Messages\Protobuf\Protos.proto&quot; --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\Grpc.Tools\1.0.1\tools\windows_x64\grpc_csharp_plugin.exe" />
+  </Target>
 
 </Project>

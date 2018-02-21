@@ -1,0 +1,14 @@
+syntax = "proto3";
+package messages;
+option csharp_namespace = "ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf";
+
+message Start {}
+message StartRemote {}
+message PiNumber {
+	string Pi = 1;
+}
+message CalcOptions {
+	int32 Digits = 1;
+	int32 Iterations = 2;
+	string ReceiverAddress = 3;
+}

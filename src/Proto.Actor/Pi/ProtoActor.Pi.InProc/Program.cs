@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
+using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
@@ -28,14 +29,14 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.InProc
             var echoProps = Actor.FromProducer(() => new EchoActor(calculationCount, taskCompletionSource));
 
             var piActors = Actor.Spawn(piCalcProps);
-            var echoActor = Actor.Spawn(echoProps);
+            var echoActor = Actor.SpawnNamed(echoProps, "echoActor");
 
             WriteBenchmarkInfo(processorCount, calculationCount);
             Console.WriteLine();
             WritePiBenchMark(piDigit, piIteration);
             Console.WriteLine();
 
-            var options = new PiCalculatorActor.CalcOptions(piDigit, piIteration, echoActor);
+            var options = new CalcOptions { Digits = piDigit, Iterations = piIteration, ReceiverAddress = echoActor.Address };
 
             Console.WriteLine("Routee\t\t\tElapsed\t\tMsg/sec");
             var tasks = taskCompletionSource.Task;

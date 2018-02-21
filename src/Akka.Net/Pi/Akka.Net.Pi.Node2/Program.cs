@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using ActorModelBenchmarks.Akka.Net.Pi.Actors;
+using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
 using Akka.Actor;
 using Akka.Configuration;
 using Akka.Routing;

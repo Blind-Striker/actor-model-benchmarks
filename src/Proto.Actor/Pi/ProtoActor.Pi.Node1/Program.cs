@@ -5,6 +5,8 @@ using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
+//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
+using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
@@ -25,16 +27,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
             var piIteration = benchmarkSettings.PiIteration;
             var node2Address = $"{benchmarkSettings.Node2Ip}:{benchmarkSettings.Node2Port}";
 
-            //Registering "knownTypes" is not required, but improves performance as those messages
-            //do not need to pass any typename manifest
-            var wire = new WireSerializer(new[]
-            {
-                typeof(BigInteger),
-                typeof(PiCalculatorActor.CalcOptions),
-                typeof(PiCalculatorActor.PiNumber),
-                typeof(StartRemote), typeof(Start)
-            });
-            Serialization.RegisterSerializer(wire, true);
+            SwitchToWire();
 
             Remote.Start(benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port);
 
@@ -43,7 +36,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
 
             var piActors = new PID(node2Address, "piActors");
             var starterActor = new PID(node2Address, "starterActor");
-            var echoActor = Actor.Spawn(echoProps);
+            var echoActor = Actor.SpawnNamed(echoProps, "echoActor");
 
             WriteBenchmarkInfo(processorCount, calculationCount);
             Console.WriteLine();
@@ -52,7 +45,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
 
             starterActor.RequestAsync<Start>(new StartRemote()).Wait();
 
-            var options = new PiCalculatorActor.CalcOptions(piDigit, piIteration, echoActor);
+            var options = new CalcOptions {Digits = piDigit, Iterations = piIteration, ReceiverAddress = echoActor.Address };
 
             Console.WriteLine("Routee\t\t\tElapsed\t\tMsg/sec");
             var tasks = taskCompletionSource.Task;
@@ -105,6 +98,25 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
             Console.WriteLine("ProcessorCount:          {0}", processorCount);
             Console.WriteLine("Pi Calculation Count:    {0}  ({0:0e0})", calculationCount);
             Console.WriteLine();
+        }
+
+        private static void SwitchToWire()
+        {
+            //Registering "knownTypes" is not required, but improves performance as those messages
+            //do not need to pass any typename manifest
+            var wire = new WireSerializer(new[]
+            {
+                typeof(CalcOptions),
+                typeof(PiNumber),
+                typeof(StartRemote),
+                typeof(Start)
+            });
+            Serialization.RegisterSerializer(wire, true);
+        }
+
+        private static void SwitchToProtobuf()
+        {
+            Serialization.RegisterFileDescriptor(Actors.Messages.Protobuf.ProtosReflection.Descriptor);
         }
     }
 }

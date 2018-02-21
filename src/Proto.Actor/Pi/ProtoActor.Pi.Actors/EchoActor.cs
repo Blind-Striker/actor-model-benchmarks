@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Proto;
+//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
+using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
 
 namespace ActorModelBenchmarks.ProtoActor.Pi.Actors
 {
@@ -20,7 +22,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors
 
             switch (context.Message)
             {
-                case PiCalculatorActor.PiNumber _:
+                case PiNumber _:
                     _calculationCount--;
 
                     if (_calculationCount == 0)

@@ -2,6 +2,8 @@
 using System.Numerics;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
+//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
+using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
@@ -19,26 +21,35 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node2
 
             var processorCount = Environment.ProcessorCount;
 
-            //Registering "knownTypes" is not required, but improves performance as those messages
-            //do not need to pass any typename manifest
-            var wire = new WireSerializer(new[]
-            {
-                typeof(BigInteger),
-                typeof(PiCalculatorActor.CalcOptions),
-                typeof(PiCalculatorActor.PiNumber),
-                typeof(StartRemote), typeof(Start)
-            });
-            Serialization.RegisterSerializer(wire, true);
-
+            SwitchToWire();
             Remote.Start(benchmarkSettings.Node2Ip, benchmarkSettings.Node2Port);
 
             var piCalcProps = Router.NewRoundRobinPool(Actor.FromProducer(() => new PiCalculatorActor()), processorCount);
             var starterActorProps = Actor.FromProducer(() => new StarterActor());
 
-            Actor.SpawnNamed(piCalcProps, "piActors");
-            Actor.SpawnNamed(starterActorProps, "starterActor");
+            PID piActors = Actor.SpawnNamed(piCalcProps, "piActors");
+            PID starterActor = Actor.SpawnNamed(starterActorProps, "starterActor");
 
             Console.ReadLine();
+        }
+
+        private static void SwitchToWire()
+        {
+            //Registering "knownTypes" is not required, but improves performance as those messages
+            //do not need to pass any typename manifest
+            var wire = new WireSerializer(new[]
+            {
+                typeof(CalcOptions),
+                typeof(PiNumber),
+                typeof(StartRemote),
+                typeof(Start)
+            });
+            Serialization.RegisterSerializer(wire, true);
+        }
+
+        private static void SwitchToProtobuf()
+        {
+            Serialization.RegisterFileDescriptor(Actors.Messages.Protobuf.ProtosReflection.Descriptor);
         }
     }
 
