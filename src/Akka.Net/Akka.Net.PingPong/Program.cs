@@ -57,7 +57,7 @@ namespace ActorModelBenchmarks.Akka.Net.PingPong
 
             Start(timesToRun);
 
-            Console.ReadKey();
+            Console.Read();
         }
 
         private static async void Start(uint timesToRun)

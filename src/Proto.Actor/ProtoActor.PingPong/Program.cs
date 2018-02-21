@@ -62,7 +62,7 @@ namespace ActorModelBenchmarks.ProtoActor.PingPong
 
             Start(timesToRun);
 
-            Console.ReadKey();
+            Console.Read();
         }
 
         private static async void Start(uint timesToRun)

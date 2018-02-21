@@ -1,7 +1,4 @@
 {
-   // Use IntelliSense to find out which attributes exist for C# debugging
-   // Use hover for the description of the existing attributes
-   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
         {
@@ -9,11 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-akka-inproc",
-            // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/Akka.Net/Akka.Net.Inproc/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.Akka.Net.Inproc.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Akka.Net/Akka.Net.Inproc",
-            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
             "console": "internalConsole",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart"
@@ -34,7 +29,7 @@
             "name": "Akka.Net Skynet Benchmark",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-akka-skynet",
             "program": "${workspaceFolder}/Akka.Net/Akka.Net.Skynet/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.Akka.Net.Skynet.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Akka.Net/Akka.Net.Skynet",
@@ -46,7 +41,7 @@
             "name": "Akka.Net Remote Node 1",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-akka-remote-node1",
             "program": "${workspaceFolder}/Akka.Net/Remote/Akka.Net.Remote.Node1/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.Akka.Net.Remote.Node1.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Akka.Net/Remote/Akka.Net.Remote.Node1",
@@ -58,7 +53,7 @@
             "name": "Akka.Net Remote Node 2",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-akka-remote-node2",
             "program": "${workspaceFolder}/Akka.Net/Remote/Akka.Net.Remote.Node2/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.Akka.Net.Remote.Node2.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Akka.Net/Remote/Akka.Net.Remote.Node2",
@@ -70,7 +65,7 @@
             "name": "Akka.Net Pi Inproc Benchmark",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-akka-pi-inproc",
             "program": "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.InProc/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.Akka.Net.Pi.InProc.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.InProc",
@@ -82,7 +77,7 @@
             "name": "Akka.Net Pi Remote Node 1",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-sln",
             "program": "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.Node1/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.Akka.Net.Pi.Node1.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.Node1",
@@ -94,10 +89,106 @@
             "name": "Akka.Net Pi Remote Node 2",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-sln",
             "program": "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.Node2/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.Akka.Net.Pi.Node2.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.Node2",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Proto.Actor Inproc Benchmark",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-proto-inproc",
+            "program": "${workspaceFolder}/Proto.Actor/ProtoActor.Inproc/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.Inproc.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/ProtoActor.Inproc",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },        
+        {
+            "name": "Proto.Actor Ping Pong Benchmark",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-proto-ping-pong",
+            "program": "${workspaceFolder}/Proto.Actor/ProtoActor.PingPong/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.PingPong.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/ProtoActor.PingPong",            
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Proto.Actor Skynet Benchmark",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-proto-skynet",
+            "program": "${workspaceFolder}/Proto.Actor/ProtoActor.Skynet/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.Skynet.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/ProtoActor.Skynet",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Proto.Actor Remote Node 1",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-sln",
+            "program": "${workspaceFolder}/Proto.Actor/Remote/ProtoActor.Remote.Node1/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.Remote.Node1.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/Remote/ProtoActor.Remote.Node1",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Proto.Actor Remote Node 2",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-sln",
+            "program": "${workspaceFolder}/Proto.Actor/Remote/ProtoActor.Remote.Node2/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.Remote.Node2.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/Remote/ProtoActor.Remote.Node2",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Proto.Actor Pi Inproc Benchmark",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-proto-pi-inproc",
+            "program": "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.InProc/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.Pi.InProc.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.InProc",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Proto.Actor Pi Remote Node 1",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-sln",
+            "program": "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.Node1/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.Pi.Node1.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.Node1",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Proto.Actor Pi Remote Node 2",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-sln",
+            "program": "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.Node2/bin/Debug/netcoreapp2.0/ActorModelBenchmarks.ProtoActor.Pi.Node2.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.Node2",
             "console": "internalConsole",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart"
@@ -117,6 +208,14 @@
         {
             "name": "Akka Pi Remote Benchmark",
             "configurations": ["Akka.Net Pi Remote Node 1", "Akka.Net Pi Remote Node 2"]
-        }
+        },
+        {
+            "name": "Proto.Actor Remote Benchmark",
+            "configurations": ["Proto.Actor Remote Node 1", "Proto.Actor Remote Node 2"]
+        },
+        {
+            "name": "Proto.Actor Pi Remote Benchmark",
+            "configurations": ["Proto.Actor Pi Remote Node 1", "Proto.Actor Pi Remote Node 2"]
+        },
     ]
 }

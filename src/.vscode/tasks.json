@@ -30,6 +30,146 @@
                 "${workspaceFolder}/Akka.Net/Akka.Net.PingPong/Akka.Net.PingPong.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-skynet",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Akka.Net.Skynet/Akka.Net.Skynet.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-remote-node1",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Remote/Akka.Net.Remote.Node1/Akka.Net.Remote.Node1.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-remote-node2",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Remote/Akka.Net.Remote.Node2/Akka.Net.Remote.Node2.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-pi-inproc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.InProc/Akka.Net.Pi.InProc.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-pi-node1",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.Node1/Akka.Net.Pi.Node1.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-pi-node2",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Pi/Akka.Net.Pi.Node2/Akka.Net.Pi.Node2.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-inproc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/ProtoActor.Inproc/ProtoActor.Inproc.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-ping-pong",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/ProtoActor.PingPong/ProtoActor.PingPong.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-skynet",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/ProtoActor.Skynet/ProtoActor.Skynet.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-remote-node1",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/Remote/ProtoActor.Remote.Node1/ProtoActor.Remote.Node1.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-remote-node2",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/Remote/ProtoActor.Remote.Node2/ProtoActor.Remote.Node2.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-pi-inproc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.InProc/ProtoActor.Pi.InProc.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-pi-node1",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.Node1/ProtoActor.Pi.Node1.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-proto-pi-node2",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Proto.Actor/Pi/ProtoActor.Pi.Node2/ProtoActor.Pi.Node2.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
