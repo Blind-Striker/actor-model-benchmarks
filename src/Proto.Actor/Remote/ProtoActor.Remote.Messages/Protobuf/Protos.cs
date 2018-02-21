@@ -4,9 +4,10 @@
 #region Designer generated code
 
 using pb = global::Google.Protobuf;
+using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
-
-namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
+using scg = global::System.Collections.Generic;
+namespace ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf {
 
   /// <summary>Holder for reflection information generated from Protos.proto</summary>
   public static partial class ProtosReflection {
@@ -21,17 +22,17 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
     static ProtosReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxQcm90b3MucHJvdG8SCG1lc3NhZ2VzGhhQcm90by5BY3Rvci9Qcm90b3Mu",
-            "cHJvdG8iBwoFU3RhcnQiKQoLU3RhcnRSZW1vdGUSGgoGU2VuZGVyGAEgASgL",
-            "MgouYWN0b3IuUElEIgYKBFBpbmciBgoEUG9uZ0ILqgIITWVzc2FnZXNiBnBy",
-            "b3RvMw=="));
+            "CgxQcm90b3MucHJvdG8SCG1lc3NhZ2VzIgcKBVN0YXJ0IiQKC1N0YXJ0UmVt",
+            "b3RlEhUKDVNlbmRlckFkZHJlc3MYASABKAkiBgoEUGluZyIGCgRQb25nQjuq",
+            "AjhBY3Rvck1vZGVsQmVuY2htYXJrcy5Qcm90b0FjdG9yLlJlbW90ZS5NZXNz",
+            "YWdlcy5Qcm90b2J1ZmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Proto.ProtosReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Start), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Start.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.StartRemote), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.StartRemote.Parser, new[]{ "Sender" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Ping), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Ping.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Pong), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Pong.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.Start), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.Start.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.StartRemote), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.StartRemote.Parser, new[]{ "SenderAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.Ping), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.Ping.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.Pong), global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.Pong.Parser, null, null, null, null)
           }));
     }
     #endregion
@@ -45,7 +46,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection.Descriptor.MessageTypes[0]; }
+      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -134,7 +135,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -151,7 +152,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public StartRemote(StartRemote other) : this() {
-      Sender = other.sender_ != null ? other.Sender.Clone() : null;
+      senderAddress_ = other.senderAddress_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -159,14 +160,14 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
       return new StartRemote(this);
     }
 
-    /// <summary>Field number for the "Sender" field.</summary>
-    public const int SenderFieldNumber = 1;
-    private global::Proto.PID sender_;
+    /// <summary>Field number for the "SenderAddress" field.</summary>
+    public const int SenderAddressFieldNumber = 1;
+    private string senderAddress_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.PID Sender {
-      get { return sender_; }
+    public string SenderAddress {
+      get { return senderAddress_; }
       set {
-        sender_ = value;
+        senderAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -183,14 +184,14 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Sender, other.Sender)) return false;
+      if (SenderAddress != other.SenderAddress) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (sender_ != null) hash ^= Sender.GetHashCode();
+      if (SenderAddress.Length != 0) hash ^= SenderAddress.GetHashCode();
       return hash;
     }
 
@@ -201,17 +202,17 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (sender_ != null) {
+      if (SenderAddress.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteMessage(Sender);
+        output.WriteString(SenderAddress);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (sender_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Sender);
+      if (SenderAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderAddress);
       }
       return size;
     }
@@ -221,11 +222,8 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
       if (other == null) {
         return;
       }
-      if (other.sender_ != null) {
-        if (sender_ == null) {
-          sender_ = new global::Proto.PID();
-        }
-        Sender.MergeFrom(other.Sender);
+      if (other.SenderAddress.Length != 0) {
+        SenderAddress = other.SenderAddress;
       }
     }
 
@@ -238,10 +236,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
             input.SkipLastField();
             break;
           case 10: {
-            if (sender_ == null) {
-              sender_ = new global::Proto.PID();
-            }
-            input.ReadMessage(sender_);
+            SenderAddress = input.ReadString();
             break;
           }
         }
@@ -257,7 +252,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection.Descriptor.MessageTypes[2]; }
+      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -346,7 +341,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection.Descriptor.MessageTypes[3]; }
+      get { return global::ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

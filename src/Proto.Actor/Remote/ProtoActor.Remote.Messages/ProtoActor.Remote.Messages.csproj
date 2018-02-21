@@ -1,19 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OutputType>library</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>ActorModelBenchmarks.ProtoActor.Remote.Messages</AssemblyName>
     <RootNamespace>ActorModelBenchmarks.ProtoActor.Remote.Messages</RootNamespace>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
   <ItemGroup>
-    <None Include="build.bat" />
-    <None Include="Protos.proto" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.4.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.4.0" />
+    <PackageReference Include="Grpc.Tools" Version="1.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
     <PackageReference Include="Proto.Actor" Version="0.1.16" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="%userprofile%\.nuget\packages\google.protobuf.tools\3.4.0\tools\windows_x64\protoc.exe -I=&quot;$(ProjectDir)Protobuf&quot; --csharp_out=&quot;$(ProjectDir)Protobuf&quot; &quot;$(ProjectDir)Protobuf\Protos.proto&quot; --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\Grpc.Tools\1.0.1\tools\windows_x64\grpc_csharp_plugin.exe" />
+  </Target>
 </Project>

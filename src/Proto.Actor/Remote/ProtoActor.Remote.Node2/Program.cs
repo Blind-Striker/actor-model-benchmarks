@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ActorModelBenchmarks.ProtoActor.Remote.Messages;
+using ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
-using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection;
+using Ping = ActorModelBenchmarks.ProtoActor.Remote.Messages.Ping;
+using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection;
 
 namespace ActorModelBenchmarks.ProtoActor.Remote.Node2
 {
@@ -32,7 +33,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node2
             {
                 case StartRemote sr:
                     Console.WriteLine("Starting");
-                    _sender = sr.Sender;
+                    _sender = new PID(sr.SenderAddress, "local");
                     context.Respond(new Start());
                     return Actor.Done;
                 case Ping _:

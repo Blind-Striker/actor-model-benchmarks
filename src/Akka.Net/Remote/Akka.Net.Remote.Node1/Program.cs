@@ -30,7 +30,7 @@ namespace ActorModelBenchmarks.Akka.Net.Remote.Node1
 
             var messageCount = benchmarkSettings.MessageCount;
             var wg = new AutoResetEvent(false);
-            var actorRef = actorSystem.ActorOf(Props.Create(() => new LocalActor(0, messageCount, wg)));
+            var actorRef = actorSystem.ActorOf(Props.Create(() => new LocalActor(0, messageCount, wg)), "local");
             var remoteActor = actorSystem.ActorSelection($"akka.tcp://remote-sys@{node2Ip}:{node2Port}/user/remote");
 
             var address = actorRef.Path.ToStringWithAddress(new Address("akka.tcp", "remote-sys", node1Ip, node1Port));

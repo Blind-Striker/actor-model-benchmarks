@@ -1,0 +1,10 @@
+syntax = "proto3";
+package messages;
+option csharp_namespace = "ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf";
+
+message Start {}
+message StartRemote {
+	string SenderAddress = 1;
+}
+message Ping {}
+message Pong {}

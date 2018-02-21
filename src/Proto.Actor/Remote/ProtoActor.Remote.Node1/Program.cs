@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ActorModelBenchmarks.ProtoActor.Remote.Messages;
+using ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 using Proto.Remote;
-using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.ProtosReflection;
+using Ping = ActorModelBenchmarks.ProtoActor.Remote.Messages.Ping;
+using ProtosReflection = ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf.ProtosReflection;
 
 namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
 {
@@ -16,6 +17,9 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
         {
             var benchmarkSettings = Configuration.GetConfiguration<RemoteBenchmarkSettings>("RemoteBenchmarkSettings");
 
+            string node1Ip = benchmarkSettings.Node1Ip;
+            int node1Port = benchmarkSettings.Node1Port;
+
             Serialization.RegisterFileDescriptor(ProtosReflection.Descriptor);
             Proto.Remote.Remote.Start(benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port);
 
@@ -23,9 +27,9 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
             var wg = new AutoResetEvent(false);
             var props = Actor.FromProducer(() => new LocalActor(0, messageCount, wg));
 
-            var pid = Actor.Spawn(props);
+            var pid = Actor.SpawnNamed(props, "local");
             var remote = new PID($"{benchmarkSettings.Node2Ip}:{benchmarkSettings.Node2Port}", "remote");
-            remote.RequestAsync<Start>(new StartRemote {Sender = pid}).Wait();
+            remote.RequestAsync<Start>(new StartRemote {SenderAddress = $"{node1Ip}:{node1Port}" }).Wait();
 
             var start = DateTime.Now;
             Console.WriteLine("Starting to send");
