@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using Akka.Actor;
 
 namespace ActorModelBenchmarks.Akka.Net.Pi.Actors

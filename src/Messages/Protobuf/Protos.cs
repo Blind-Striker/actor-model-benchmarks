@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
+namespace ActorModelBenchmarks.Messages.Protobuf {
 
   /// <summary>Holder for reflection information generated from Protos.proto</summary>
   public static partial class ProtosReflection {
@@ -22,18 +22,21 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
     static ProtosReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxQcm90b3MucHJvdG8SCG1lc3NhZ2VzIgcKBVN0YXJ0Ig0KC1N0YXJ0UmVt",
-            "b3RlIhYKCFBpTnVtYmVyEgoKAlBpGAEgASgJIkoKC0NhbGNPcHRpb25zEg4K",
-            "BkRpZ2l0cxgBIAEoBRISCgpJdGVyYXRpb25zGAIgASgFEhcKD1JlY2VpdmVy",
-            "QWRkcmVzcxgDIAEoCUI+qgI7QWN0b3JNb2RlbEJlbmNobWFya3MuUHJvdG9B",
-            "Y3Rvci5QaS5BY3RvcnMuTWVzc2FnZXMuUHJvdG9idWZiBnByb3RvMw=="));
+            "CgxQcm90b3MucHJvdG8SCG1lc3NhZ2VzIgcKBVN0YXJ0IiQKC1N0YXJ0UmVt",
+            "b3RlEhUKDVNlbmRlckFkZHJlc3MYASABKAkiFgoIUGlOdW1iZXISCgoCUGkY",
+            "ASABKAkiSgoLQ2FsY09wdGlvbnMSDgoGRGlnaXRzGAEgASgFEhIKCkl0ZXJh",
+            "dGlvbnMYAiABKAUSFwoPUmVjZWl2ZXJBZGRyZXNzGAMgASgJIgYKBFBpbmci",
+            "BgoEUG9uZ0IpqgImQWN0b3JNb2RlbEJlbmNobWFya3MuTWVzc2FnZXMuUHJv",
+            "dG9idWZiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.Start), global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.Start.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.StartRemote), global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.StartRemote.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.PiNumber), global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.PiNumber.Parser, new[]{ "Pi" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.CalcOptions), global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.CalcOptions.Parser, new[]{ "Digits", "Iterations", "ReceiverAddress" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.Messages.Protobuf.Start), global::ActorModelBenchmarks.Messages.Protobuf.Start.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.Messages.Protobuf.StartRemote), global::ActorModelBenchmarks.Messages.Protobuf.StartRemote.Parser, new[]{ "SenderAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.Messages.Protobuf.PiNumber), global::ActorModelBenchmarks.Messages.Protobuf.PiNumber.Parser, new[]{ "Pi" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.Messages.Protobuf.CalcOptions), global::ActorModelBenchmarks.Messages.Protobuf.CalcOptions.Parser, new[]{ "Digits", "Iterations", "ReceiverAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.Messages.Protobuf.Ping), global::ActorModelBenchmarks.Messages.Protobuf.Ping.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ActorModelBenchmarks.Messages.Protobuf.Pong), global::ActorModelBenchmarks.Messages.Protobuf.Pong.Parser, null, null, null, null)
           }));
     }
     #endregion
@@ -47,7 +50,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[0]; }
+      get { return global::ActorModelBenchmarks.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -136,7 +139,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ActorModelBenchmarks.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -153,11 +156,23 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public StartRemote(StartRemote other) : this() {
+      senderAddress_ = other.senderAddress_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public StartRemote Clone() {
       return new StartRemote(this);
+    }
+
+    /// <summary>Field number for the "SenderAddress" field.</summary>
+    public const int SenderAddressFieldNumber = 1;
+    private string senderAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SenderAddress {
+      get { return senderAddress_; }
+      set {
+        senderAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -173,12 +188,14 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (SenderAddress != other.SenderAddress) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (SenderAddress.Length != 0) hash ^= SenderAddress.GetHashCode();
       return hash;
     }
 
@@ -189,11 +206,18 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (SenderAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SenderAddress);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (SenderAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderAddress);
+      }
       return size;
     }
 
@@ -201,6 +225,9 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
     public void MergeFrom(StartRemote other) {
       if (other == null) {
         return;
+      }
+      if (other.SenderAddress.Length != 0) {
+        SenderAddress = other.SenderAddress;
       }
     }
 
@@ -212,6 +239,10 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
           default:
             input.SkipLastField();
             break;
+          case 10: {
+            SenderAddress = input.ReadString();
+            break;
+          }
         }
       }
     }
@@ -225,7 +256,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[2]; }
+      get { return global::ActorModelBenchmarks.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -342,7 +373,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[3]; }
+      get { return global::ActorModelBenchmarks.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -502,6 +533,184 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf {
             ReceiverAddress = input.ReadString();
             break;
           }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Ping : pb::IMessage<Ping> {
+    private static readonly pb::MessageParser<Ping> _parser = new pb::MessageParser<Ping>(() => new Ping());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Ping> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ActorModelBenchmarks.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Ping() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Ping(Ping other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Ping Clone() {
+      return new Ping(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Ping);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Ping other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Ping other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Pong : pb::IMessage<Pong> {
+    private static readonly pb::MessageParser<Pong> _parser = new pb::MessageParser<Pong>(() => new Pong());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Pong> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ActorModelBenchmarks.Messages.Protobuf.ProtosReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Pong() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Pong(Pong other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Pong Clone() {
+      return new Pong(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Pong);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Pong other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Pong other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
         }
       }
     }

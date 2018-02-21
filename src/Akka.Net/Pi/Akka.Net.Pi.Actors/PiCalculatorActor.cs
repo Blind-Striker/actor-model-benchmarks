@@ -1,4 +1,5 @@
-﻿using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
+﻿//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using Akka.Actor;
 
@@ -14,8 +15,9 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.Actors
                 var pi = calculator.GetPi(options.Digits, options.Iterations);
 
                 var strPi = pi.ToString();
+                var actorSelection = Context.ActorSelection(options.ReceiverAddress);
 
-                options.Receiver?.Tell(new PiNumber(strPi));
+                actorSelection.Tell(new PiNumber {Pi = strPi});
             }
         }
     }

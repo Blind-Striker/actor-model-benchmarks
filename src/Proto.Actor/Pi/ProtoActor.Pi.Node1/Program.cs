@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
-//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
-using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
@@ -27,7 +26,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
             var piIteration = benchmarkSettings.PiIteration;
             var node2Address = $"{benchmarkSettings.Node2Ip}:{benchmarkSettings.Node2Port}";
 
-            SwitchToWire();
+            SwitchToProtobuf();
 
             Remote.Start(benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port);
 
@@ -116,7 +115,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node1
 
         private static void SwitchToProtobuf()
         {
-            Serialization.RegisterFileDescriptor(Actors.Messages.Protobuf.ProtosReflection.Descriptor);
+            Serialization.RegisterFileDescriptor(Messages.Protobuf.ProtosReflection.Descriptor);
         }
     }
 }

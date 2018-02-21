@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Numerics;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.ProtoActor.Pi.Actors;
-//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
-using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
@@ -21,7 +20,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node2
 
             var processorCount = Environment.ProcessorCount;
 
-            SwitchToWire();
+            SwitchToProtobuf();
             Remote.Start(benchmarkSettings.Node2Ip, benchmarkSettings.Node2Port);
 
             var piCalcProps = Router.NewRoundRobinPool(Actor.FromProducer(() => new PiCalculatorActor()), processorCount);
@@ -49,7 +48,7 @@ namespace ActorModelBenchmarks.ProtoActor.Pi.Node2
 
         private static void SwitchToProtobuf()
         {
-            Serialization.RegisterFileDescriptor(Actors.Messages.Protobuf.ProtosReflection.Descriptor);
+            Serialization.RegisterFileDescriptor(Messages.Protobuf.ProtosReflection.Descriptor);
         }
     }
 

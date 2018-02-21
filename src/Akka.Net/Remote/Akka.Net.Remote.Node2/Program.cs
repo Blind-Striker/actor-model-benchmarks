@@ -1,13 +1,9 @@
 ﻿using System;
 using System.IO;
-using ActorModelBenchmarks.Akka.Net.Remote.Messages;
+using ActorModelBenchmarks.Messages;
+//using ActorModelBenchmarks.Messages.Protobuf;
 using Akka.Actor;
 using Akka.Configuration;
-
-//using Start = Akka.Net.Messages.Protobuf.ProtoStart;
-//using StartRemote = Akka.Net.Messages.Protobuf.ProtoRemote;
-//using Ping = Akka.Net.Messages.Protobuf.ProtoPing;
-//using Pong = Akka.Net.Messages.Protobuf.ProtoPong;
 
 namespace ActorModelBenchmarks.Akka.Net.Remote.Node2
 {

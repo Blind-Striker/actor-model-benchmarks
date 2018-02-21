@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <AssemblyName>ActorModelBenchmarks.Messages</AssemblyName>
+    <RootNamespace>ActorModelBenchmarks.Messages</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.Tools" Version="1.0.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.4.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.4.0" />
+  </ItemGroup>
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="%userprofile%\.nuget\packages\google.protobuf.tools\3.4.0\tools\windows_x64\protoc.exe -I=&quot;$(ProjectDir)Protobuf&quot; --csharp_out=&quot;$(ProjectDir)Protobuf&quot; &quot;$(ProjectDir)Protobuf\Protos.proto&quot; --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\Grpc.Tools\1.0.1\tools\windows_x64\grpc_csharp_plugin.exe" />
+  </Target>
+</Project>

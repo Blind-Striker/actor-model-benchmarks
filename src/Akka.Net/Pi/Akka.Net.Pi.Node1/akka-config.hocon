@@ -17,10 +17,16 @@
                 						
 		serializers {
 			hyperion = "Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion"
+			proto = "Akka.Remote.Serialization.ProtobufSerializer, Akka.Remote"
 		}
 
 		serialization-bindings {
 			"System.Object" = hyperion
+			"Google.Protobuf.IMessage, Google.Protobuf" = proto
+		}
+
+		serialization-identifiers {
+		  "Akka.Remote.Serialization.ProtobufSerializer, Akka.Remote" = 2
 		}
 	}
   

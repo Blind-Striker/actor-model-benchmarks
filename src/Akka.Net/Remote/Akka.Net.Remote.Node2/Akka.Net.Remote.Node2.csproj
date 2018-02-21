@@ -10,10 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Akka.Remote" Version="1.3.4" />
     <PackageReference Include="Akka.Serialization.Hyperion" Version="1.3.4-beta58" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Akka.Net.Remote.Messages\Akka.Net.Remote.Messages.csproj" />
+    <PackageReference Include="Google.Protobuf" Version="3.4.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +18,10 @@
       <Link>benchmark-settings.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Messages\Messages.csproj" />
   </ItemGroup>
 
   <ItemGroup>

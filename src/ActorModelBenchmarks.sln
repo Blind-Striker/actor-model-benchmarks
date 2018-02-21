@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Akka.Net", "Akka.Net", "{DA88433E-C14A-4038-BA2F-24BB4965D029}"
 EndProject
@@ -24,8 +24,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.Net.Pi.Node2", "Akka.Net\Pi\Akka.Net.Pi.Node2\Akka.Net.Pi.Node2.csproj", "{E2ECF3BA-6168-4095-B8F4-D6AF0AFE7305}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.Net.Pi.InProc", "Akka.Net\Pi\Akka.Net.Pi.InProc\Akka.Net.Pi.InProc.csproj", "{CA418BEF-6A10-4B2B-9581-7F4B20CCCEC6}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.Net.Remote.Messages", "Akka.Net\Remote\Akka.Net.Remote.Messages\Akka.Net.Remote.Messages.csproj", "{2B0ED4BC-FBEC-4C9B-BC8B-44D1F8ED8E0D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.Net.Remote.Node1", "Akka.Net\Remote\Akka.Net.Remote.Node1\Akka.Net.Remote.Node1.csproj", "{FD141AED-9C14-4BAF-B919-059686024D6A}"
 EndProject
@@ -51,8 +49,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActor.PingPong", "Prot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActor.Skynet", "Proto.Actor\ProtoActor.Skynet\ProtoActor.Skynet.csproj", "{39B567C4-BAD5-4520-AA44-849D9F6DA5F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActor.Remote.Messages", "Proto.Actor\Remote\ProtoActor.Remote.Messages\ProtoActor.Remote.Messages.csproj", "{C5FBA845-646C-42A9-B4BF-4DD057E19342}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActor.Remote.Node1", "Proto.Actor\Remote\ProtoActor.Remote.Node1\ProtoActor.Remote.Node1.csproj", "{3F243A9E-1A9A-4899-B2E3-0334D3B27F47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActor.Remote.Node2", "Proto.Actor\Remote\ProtoActor.Remote.Node2\ProtoActor.Remote.Node2.csproj", "{5D201DA0-A518-4CE8-8E82-762CBB2304A7}"
@@ -61,6 +57,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".settings", ".settings", "{
 	ProjectSection(SolutionItems) = preProject
 		.settings\benchmark-settings.json = .settings\benchmark-settings.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{BFA9EF75-A8FF-4E1A-BBFF-65D5FC4F7B38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,10 +86,6 @@ Global
 		{CA418BEF-6A10-4B2B-9581-7F4B20CCCEC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA418BEF-6A10-4B2B-9581-7F4B20CCCEC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA418BEF-6A10-4B2B-9581-7F4B20CCCEC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B0ED4BC-FBEC-4C9B-BC8B-44D1F8ED8E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B0ED4BC-FBEC-4C9B-BC8B-44D1F8ED8E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B0ED4BC-FBEC-4C9B-BC8B-44D1F8ED8E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B0ED4BC-FBEC-4C9B-BC8B-44D1F8ED8E0D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD141AED-9C14-4BAF-B919-059686024D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD141AED-9C14-4BAF-B919-059686024D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD141AED-9C14-4BAF-B919-059686024D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -140,10 +134,6 @@ Global
 		{39B567C4-BAD5-4520-AA44-849D9F6DA5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39B567C4-BAD5-4520-AA44-849D9F6DA5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39B567C4-BAD5-4520-AA44-849D9F6DA5F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C5FBA845-646C-42A9-B4BF-4DD057E19342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5FBA845-646C-42A9-B4BF-4DD057E19342}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5FBA845-646C-42A9-B4BF-4DD057E19342}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5FBA845-646C-42A9-B4BF-4DD057E19342}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F243A9E-1A9A-4899-B2E3-0334D3B27F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F243A9E-1A9A-4899-B2E3-0334D3B27F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F243A9E-1A9A-4899-B2E3-0334D3B27F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -152,6 +142,10 @@ Global
 		{5D201DA0-A518-4CE8-8E82-762CBB2304A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D201DA0-A518-4CE8-8E82-762CBB2304A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D201DA0-A518-4CE8-8E82-762CBB2304A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA9EF75-A8FF-4E1A-BBFF-65D5FC4F7B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA9EF75-A8FF-4E1A-BBFF-65D5FC4F7B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA9EF75-A8FF-4E1A-BBFF-65D5FC4F7B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA9EF75-A8FF-4E1A-BBFF-65D5FC4F7B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,7 +159,6 @@ Global
 		{D0F86FD5-1294-48D8-B533-569B45FBF291} = {2886A6EA-8B87-470F-B6C1-549C8916B368}
 		{E2ECF3BA-6168-4095-B8F4-D6AF0AFE7305} = {2886A6EA-8B87-470F-B6C1-549C8916B368}
 		{CA418BEF-6A10-4B2B-9581-7F4B20CCCEC6} = {2886A6EA-8B87-470F-B6C1-549C8916B368}
-		{2B0ED4BC-FBEC-4C9B-BC8B-44D1F8ED8E0D} = {8E1CAAAB-B5E5-4168-8228-E9A7852C1B7B}
 		{FD141AED-9C14-4BAF-B919-059686024D6A} = {8E1CAAAB-B5E5-4168-8228-E9A7852C1B7B}
 		{4A68C3F4-23EF-41B4-BF5A-E56DB27D6068} = {8E1CAAAB-B5E5-4168-8228-E9A7852C1B7B}
 		{F2D1F8F2-4CA8-42DB-A573-7C1F16B6F72E} = {DA88433E-C14A-4038-BA2F-24BB4965D029}
@@ -178,7 +171,6 @@ Global
 		{33C76EC4-01D6-4D07-8B1D-8B7415D99AEB} = {36A5B49E-AC73-4773-9594-923BEDC950CB}
 		{B514CC60-B7EE-4E63-8A4D-05D7F9D76420} = {36A5B49E-AC73-4773-9594-923BEDC950CB}
 		{39B567C4-BAD5-4520-AA44-849D9F6DA5F6} = {36A5B49E-AC73-4773-9594-923BEDC950CB}
-		{C5FBA845-646C-42A9-B4BF-4DD057E19342} = {0050D980-848B-4BC4-9FB4-BFCFAB8D0E69}
 		{3F243A9E-1A9A-4899-B2E3-0334D3B27F47} = {0050D980-848B-4BC4-9FB4-BFCFAB8D0E69}
 		{5D201DA0-A518-4CE8-8E82-762CBB2304A7} = {0050D980-848B-4BC4-9FB4-BFCFAB8D0E69}
 	EndGlobalSection

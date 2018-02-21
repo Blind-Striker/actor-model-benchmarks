@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Proto;
-//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
-using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 
 namespace ActorModelBenchmarks.ProtoActor.Pi.Actors
 {

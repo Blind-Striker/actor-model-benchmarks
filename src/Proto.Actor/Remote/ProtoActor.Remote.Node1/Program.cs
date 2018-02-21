@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ActorModelBenchmarks.ProtoActor.Remote.Messages;
-//using ActorModelBenchmarks.ProtoActor.Remote.Messages.Protobuf;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Proto;
@@ -17,7 +17,7 @@ namespace ActorModelBenchmarks.ProtoActor.Remote.Node1
         {
             var benchmarkSettings = Configuration.GetConfiguration<RemoteBenchmarkSettings>("RemoteBenchmarkSettings");
 
-            SwitchToWire();
+            SwitchToProtobuf();
             Proto.Remote.Remote.Start(benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port);
 
             var messageCount = benchmarkSettings.MessageCount;

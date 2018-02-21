@@ -1,9 +1,11 @@
 syntax = "proto3";
 package messages;
-option csharp_namespace = "ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages.Protobuf";
+option csharp_namespace = "ActorModelBenchmarks.Messages.Protobuf";
 
 message Start {}
-message StartRemote {}
+message StartRemote {
+	string SenderAddress = 1;
+}
 message PiNumber {
 	string Pi = 1;
 }
@@ -12,3 +14,5 @@ message CalcOptions {
 	int32 Iterations = 2;
 	string ReceiverAddress = 3;
 }
+message Ping {}
+message Pong {}

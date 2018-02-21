@@ -8,15 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Akka" Version="1.3.4" />
-    <PackageReference Include="Google.Protobuf" Version="3.3.0" />
-    <PackageReference Include="Google.Protobuf.Tools" Version="3.3.0" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="%userprofile%\.nuget\packages\google.protobuf.tools\3.3.0\tools\windows_x64\protoc.exe -I=&quot;$(ProjectDir)Messages\Protobuf&quot; --csharp_out=&quot;$(ProjectDir)Messages\Protobuf&quot; &quot;$(ProjectDir)Messages\Protobuf\Protos.proto&quot;" />
-  </Target>
-
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Messages\Messages.csproj" />
     <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
   </ItemGroup>
 

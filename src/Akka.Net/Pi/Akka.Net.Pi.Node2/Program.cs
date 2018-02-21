@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
 using ActorModelBenchmarks.Akka.Net.Pi.Actors;
-using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using Akka.Actor;
 using Akka.Configuration;
 using Akka.Routing;
@@ -18,7 +19,7 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.Node2
 
             var actorSystem = ActorSystem.Create("remote-sys", config);
 
-            var actorRef =actorSystem.ActorOf(Props.Create<PiCalculatorActor>().WithRouter(new RoundRobinPool(processorCount)),"piActors");
+            var actorRef = actorSystem.ActorOf(Props.Create<PiCalculatorActor>().WithRouter(new RoundRobinPool(processorCount)), "piActors");
             var starterActor = actorSystem.ActorOf<StarterActor>("starterActor");
 
             Console.ReadLine();

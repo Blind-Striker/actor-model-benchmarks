@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-//using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages.Protobuf;
-using ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using Proto;
 

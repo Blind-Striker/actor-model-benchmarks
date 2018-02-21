@@ -5,7 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.Akka.Net.Pi.Actors;
-using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
+//using ActorModelBenchmarks.Messages;
+using ActorModelBenchmarks.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
@@ -29,9 +30,11 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.Node1
             var actorSystem = ActorSystem.Create("remote-sys", config);
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
-            var echoActor = actorSystem.ActorOf(Props.Create(() => new EchoActor(calculationCount, taskCompletionSource)));
+            var echoActor = actorSystem.ActorOf(Props.Create(() => new EchoActor(calculationCount, taskCompletionSource)), "echoActor");
             var piActors = actorSystem.ActorSelection($"akka.tcp://remote-sys@{node2Address}/user/piActors");
             var starterActor = actorSystem.ActorSelection($"akka.tcp://remote-sys@{node2Address}/user/starterActor");
+
+            var node1Address = echoActor.Path.ToStringWithAddress(new Address("akka.tcp", "remote-sys", benchmarkSettings.Node1Ip, benchmarkSettings.Node1Port));
 
             WriteBenchmarkInfo(processorCount, calculationCount);
             Console.WriteLine();
@@ -40,7 +43,7 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.Node1
 
             starterActor.Ask<Start>(new StartRemote()).Wait();
 
-            var options = new CalcOptions(piDigit, piIteration, echoActor);
+            var options = new CalcOptions { Digits = piDigit, Iterations = piIteration, ReceiverAddress = node1Address };
 
             Console.WriteLine("Routee\t\t\tElapsed\t\tMsg/sec");
             var tasks = taskCompletionSource.Task;

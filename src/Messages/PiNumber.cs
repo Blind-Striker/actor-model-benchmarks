@@ -1,4 +1,4 @@
-﻿namespace ActorModelBenchmarks.ProtoActor.Pi.Actors.Messages
+﻿namespace ActorModelBenchmarks.Messages
 {
     public class PiNumber
     {

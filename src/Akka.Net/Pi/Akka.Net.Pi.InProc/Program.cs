@@ -5,7 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ActorModelBenchmarks.Akka.Net.Pi.Actors;
-using ActorModelBenchmarks.Akka.Net.Pi.Actors.Messages;
+using ActorModelBenchmarks.Messages;
+// using ActorModelBenchmarks.Messages.Protobuf;
 using ActorModelBenchmarks.Utils;
 using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
@@ -38,7 +39,7 @@ namespace ActorModelBenchmarks.Akka.Net.Pi.InProc
             WritePiBenchMark(piDigit, piIteration);
             Console.WriteLine();
 
-            var options = new CalcOptions(piDigit, piIteration, echoActor);
+            var options = new CalcOptions { Digits = piDigit, Iterations = piIteration, ReceiverAddress = echoActor.Path.ToString() };
 
             Console.WriteLine("Routee\t\t\tElapsed\t\tMsg/sec");
             var tasks = taskCompletionSource.Task;
