@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-sln",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ActorModelBenchmarks.sln"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-inproc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Akka.Net.Inproc/Akka.Net.Inproc.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-akka-ping-pong",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Akka.Net/Akka.Net.PingPong/Akka.Net.PingPong.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
