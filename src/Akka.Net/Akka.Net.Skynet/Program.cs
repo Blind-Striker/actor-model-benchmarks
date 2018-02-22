@@ -1,5 +1,9 @@
 ﻿using System;
+using System.IO;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
+using Akka.Configuration;
 
 namespace ActorModelBenchmarks.Akka.Net.Skynet
 {
@@ -7,10 +11,12 @@ namespace ActorModelBenchmarks.Akka.Net.Skynet
     {
         private static void Main(string[] args)
         {
-            var mainSystem = ActorSystem.Create("main");
+            var benchmarkSettings = Configuration.GetConfiguration<SkynetBenchmarkSettings>("SkynetBenchmarkSettings");
+            var config = ConfigurationFactory.ParseString(File.ReadAllText("akka-config.hocon"));
+            var mainSystem = ActorSystem.Create("main", config);
 
             var rootActor = mainSystem.ActorOf(Props.Create<RootActor>());
-            var run = new RootActor.Run(3);
+            var run = new RootActor.Run(benchmarkSettings.TimesToRun);
 
             rootActor.Tell(run);
 

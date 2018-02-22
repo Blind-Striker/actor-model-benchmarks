@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Proto;
 
 namespace ActorModelBenchmarks.ProtoActor.Skynet
@@ -8,10 +10,12 @@ namespace ActorModelBenchmarks.ProtoActor.Skynet
     {
         private static void Main(string[] args)
         {
+            var benchmarkSettings = Configuration.GetConfiguration<SkynetBenchmarkSettings>("SkynetBenchmarkSettings");
+
             var props = Actor.FromProducer(() => new RootActor());
             var pid = Actor.Spawn(props);
 
-            var run = new RootActor.Run(3);
+            var run = new RootActor.Run(benchmarkSettings.TimesToRun);
 
             pid.Tell(run);
 

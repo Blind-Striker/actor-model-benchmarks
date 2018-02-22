@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using ActorModelBenchmarks.Utils;
+using ActorModelBenchmarks.Utils.Settings;
 using Akka.Actor;
 using Akka.Configuration;
 using Akka.Util.Internal;
@@ -50,17 +52,14 @@ namespace ActorModelBenchmarks.Akka.Net.PingPong
 
         private static void Main(string[] args)
         {
-            if (args.Length == 0 || !uint.TryParse(args[0], out var timesToRun))
-            {
-                timesToRun = 1u;
-            }
+            var benchmarkSettings = Configuration.GetConfiguration<PingPongSettings>("PingPongSettings");
 
-            Start(timesToRun);
+            Start(benchmarkSettings);
 
             Console.Read();
         }
 
-        private static async void Start(uint timesToRun)
+        private static async void Start(PingPongSettings pingPongSettings)
         {
             const int repeatFactor = 500;
             const long repeat = 30000L * repeatFactor;
@@ -99,6 +98,9 @@ namespace ActorModelBenchmarks.Akka.Net.PingPong
             Console.Write("Throughput, Msgs/sec, Start [ms], Total [ms],  Msgs/sec, Start [ms], Total [ms]");
             Console.WriteLine();
 
+            int timesToRun = pingPongSettings.TimesToRun;
+            int[] throughputs = pingPongSettings.Throughputs;
+
             for (var i = 0; i < timesToRun; i++)
             {
                 var redCountActorBase = 0;
@@ -106,7 +108,7 @@ namespace ActorModelBenchmarks.Akka.Net.PingPong
                 var bestThroughputActorBase = 0L;
                 var bestThroughputReceiveActor = 0L;
 
-                foreach (var throughput in GetThroughputSettings())
+                foreach (var throughput in throughputs)
                 {
                     var result1 = await Benchmark<ClientActorBase>(throughput, processorCount, repeat, PrintStats.LineStart | PrintStats.Stats, bestThroughputActorBase, redCountActorBase);
                     bestThroughputActorBase = result1.BestThroughput;
@@ -218,18 +220,6 @@ namespace ActorModelBenchmarks.Akka.Net.PingPong
         private static long GetTotalMessagesReceived(long numberOfRepeats)
         {
             return numberOfRepeats * 2;
-        }
-
-        private static IEnumerable<int> GetThroughputSettings()
-        {
-            //yield return 1;
-            //yield return 5;
-            //yield return 10;
-            //yield return 15;
-            for (var i = 20; i < 100; i += 10)
-                yield return i;
-            for (var i = 100; i < 1000; i += 100)
-                yield return i;
         }
 
         public class Destination : UntypedActor

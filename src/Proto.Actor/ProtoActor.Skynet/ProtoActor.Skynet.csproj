@@ -18,4 +18,8 @@
     <PackageReference Include="Proto.Actor" Version="0.1.16" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utils\Utils.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Utils\Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="akka-config.hocon">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
