@@ -90,3 +90,92 @@ Actor    first start time: 24.10 ms
 | 700        | 44,776,000 | 0.09       | 670.84     |
 | 800        | 44,910,000 | 0.10       | 668.99     |
 | 900        | 45,248,000 | 0.10       | 663.41     |
+
+## Inproc Benchmark Guide (Adapted from Proto.Actor repository)
+The same settings were used in the Akka.Net benchmark since this benchmark was adapted from the Proto.Actor repository. In other words, 2048-capacity BoundedMailbox was used as a mailbox. Normally Akka.Net's default mailbox is unbounded mailbox. When unbounded mailbox was used on Akka.Net, two times increase in msg/sec was observed. You can also get different results by using ForkJoinDispatcher on Akka.Net and changing the thread numbers. I could'nt benchmark it for Proto.Actor because I could not find ForkJoinDispatcher. 
+
+In `benchmark-settings.json` file you can change dispatcher and mailbox types, for capacity and thread count, you need to change them in hocon file for Akka.Net.
+
+```javascript
+"InprocBenchmarkSettings": {
+  "MessageCount": 1000000,
+  "BatchSize": 100,
+   "DispatcherType": "custom-dispatcher",
+   "MailboxType": "bounded-mailbox",
+   //"DispatcherType": "custom-fork-join-dispatcher",
+   //"MailboxType": "unbounded-mailbox",
+   "Throughputs": [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ]
+   //"Throughputs": [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 ]
+   //"Throughputs": [ 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ]
+},
+```
+
+### Akka.Net Results with 2048-capacity BoundedMailbox
+Is Server GC False
+
+| Dispatcher | Elapsed | Msg/sec    |
+|------------|---------|------------|
+| 100        | 712     | 22,471,910 |
+| 200        | 722     | 22,160,664 |
+| 300        | 701     | 22,824,536 |
+| 400        | 698     | 22,922,636 |
+| 500        | 689     | 23,222,060 |
+| 600        | 698     | 22,922,636 |
+| 700        | 686     | 23,323,615 |
+| 800        | 692     | 23,121,387 |
+| 900        | 691     | 23,154,848 |
+
+Avg Msg/sec : 22,902,699.1111111
+
+### Proto.Actor Results with 2048-capacity BoundedMailbox
+Is Server GC False
+
+| Dispatcher | Elapsed | Msg/sec     |
+|------------|---------|-------------|
+| 100        | 197     | 81,218,274  |
+| 200        | 148     | 108,108,108 |
+| 300        | 155     | 103,225,806 |
+| 400        | 146     | 109,589,041 |
+| 500        | 154     | 103,896,103 |
+| 600        | 149     | 107,382,550 |
+| 700        | 144     | 111,111,111 |
+| 800        | 154     | 103,896,103 |
+| 900        | 149     | 107,382,550 |
+
+Avg Msg/sec : 103,978,849.555556
+
+### Akka.Net Results with UnBoundedMailbox
+Is Server GC False
+
+| Dispatcher | Elapsed | Msg/sec    |
+|------------|---------|------------|
+| 100        | 315     | 50,793,650 |
+| 200        | 275     | 58,181,818 |
+| 300        | 276     | 57,971,014 |
+| 400        | 276     | 57,971,014 |
+| 500        | 275     | 58,181,818 |
+| 600        | 275     | 58,181,818 |
+| 700        | 279     | 57,347,670 |
+| 800        | 296     | 54,054,054 |
+| 900        | 279     | 57,347,670 |
+
+Avg Msg/sec : 56,670,058.4444444
+
+### Proto.Actor Results with UnBoundedMailbox
+Is Server GC False
+
+| Dispatcher | Elapsed | Msg/sec     |
+|------------|---------|-------------|
+| 100        | 200     | 80,000,000  |
+| 200        | 158     | 101,265,822 |
+| 300        | 160     | 100,000,000 |
+| 400        | 158     | 101,265,822 |
+| 500        | 154     | 103,896,103 |
+| 600        | 155     | 103,225,806 |
+| 700        | 157     | 101,910,828 |
+| 800        | 159     | 100,628,930 |
+| 900        | 153     | 104,575,163 |
+
+Avg Msg/sec : 99640941.5555556
+
+I do not know why Proto.Actor performed worse on Unbounded mailbox. May be i have missed something.
