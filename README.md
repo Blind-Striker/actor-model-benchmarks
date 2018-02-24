@@ -176,6 +176,4 @@ Is Server GC False
 | 800        | 159     | 100,628,930 |
 | 900        | 153     | 104,575,163 |
 
-Avg Msg/sec : 99640941.5555556
-
-I do not know why Proto.Actor performed worse on Unbounded mailbox. May be i have missed something.
+Avg Msg/sec : 99,640,941.5555556
