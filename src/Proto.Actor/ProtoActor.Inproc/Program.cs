@@ -37,8 +37,7 @@ namespace ActorModelBenchmarks.ProtoActor.Inproc
 
                 var echoProps = Actor.FromProducer(() => new EchoActor())
                     .WithDispatcher(d)
-                    .WithMailbox(() => BoundedMailbox.Create(2048));
-                //.WithMailbox(() => UnboundedMailbox.Create());
+                    .WithMailbox(() => benchmarkSettings.MailboxType == "bounded-mailbox" ? BoundedMailbox.Create(2048) : UnboundedMailbox.Create());
 
                 for (var i = 0; i < clientCount; i++)
                 {
@@ -46,8 +45,7 @@ namespace ActorModelBenchmarks.ProtoActor.Inproc
                     completions[i] = tsc;
                     var clientProps = Actor.FromProducer(() => new PingActor(tsc, messageCount, batchSize))
                         .WithDispatcher(d)
-                        .WithMailbox(() => BoundedMailbox.Create(2048));
-                    //.WithMailbox(() => UnboundedMailbox.Create());
+                        .WithMailbox(() => benchmarkSettings.MailboxType == "bounded-mailbox" ? BoundedMailbox.Create(2048) : UnboundedMailbox.Create());
 
                     clients[i] = Actor.Spawn(clientProps);
                     echos[i] = Actor.Spawn(echoProps);

@@ -21,11 +21,13 @@
   "InprocBenchmarkSettings": {
     "MessageCount": 1000000,
     "BatchSize": 100,
-    "AkkaDispatcherType": "akka.custom-dispatcher",
-    // "AkkaDispatcherType": "akka.custom-fork-join-dispatcher"
-    "Throughputs": [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ]
-    // "Throughputs": [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 ]
-    // "Throughputs": [ 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ]
+     "DispatcherType": "custom-dispatcher",
+     //"MailboxType": "bounded-mailbox",
+     //"DispatcherType": "custom-fork-join-dispatcher",
+     "MailboxType": "unbounded-mailbox",
+     "Throughputs": [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ]
+     //"Throughputs": [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 ]
+     //"Throughputs": [ 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ]
   },
   "RemoteBenchmarkSettings": {
     "MessageCount": 300000,

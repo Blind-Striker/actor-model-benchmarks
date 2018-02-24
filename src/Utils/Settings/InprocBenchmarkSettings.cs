@@ -6,7 +6,9 @@
 
         public int BatchSize { get; set; }
 
-        public string AkkaDispatcherType { get; set; }
+        public string DispatcherType { get; set; }
+
+        public string MailboxType { get; set; }
 
         public int[] Throughputs { get; set; }
     }

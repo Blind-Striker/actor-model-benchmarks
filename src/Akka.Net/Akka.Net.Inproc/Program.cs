@@ -26,7 +26,8 @@ namespace ActorModelBenchmarks.Akka.Net.Inproc
 
             int messageCount = benchmarkSettings.MessageCount;
             int batchSize = benchmarkSettings.BatchSize;
-            var dispatcherType = benchmarkSettings.AkkaDispatcherType;
+            var dispatcherType = benchmarkSettings.DispatcherType;
+            var mailboxType = benchmarkSettings.MailboxType;
 
             Console.WriteLine("Dispatcher\t\tElapsed\t\tMsg/sec");
             var tps = benchmarkSettings.Throughputs;
@@ -41,7 +42,7 @@ namespace ActorModelBenchmarks.Akka.Net.Inproc
 
                 var echoProps = Props.Create(typeof(EchoActor))
                     .WithDispatcher(dispatcherType)
-                    .WithMailbox("akka.bounded-mailbox");
+                    .WithMailbox(mailboxType);
 
                 for (var i = 0; i < clientCount; i++)
                 {
@@ -50,7 +51,7 @@ namespace ActorModelBenchmarks.Akka.Net.Inproc
 
                     var clientProps = Props.Create(() => new PingActor(tsc, messageCount, batchSize))
                         .WithDispatcher(dispatcherType)
-                        .WithMailbox("akka.bounded-mailbox");
+                        .WithMailbox(mailboxType);
 
                     var clientLocalActorRef = (RepointableActorRef) mainSystem.ActorOf(clientProps);
                     SpinWait.SpinUntil(() => clientLocalActorRef.IsStarted);
