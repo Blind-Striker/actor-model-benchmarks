@@ -9,7 +9,11 @@
                 "build",
                 "${workspaceFolder}/ActorModelBenchmarks.sln"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "build-akka-inproc",
