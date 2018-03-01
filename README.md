@@ -23,7 +23,7 @@ You can use the `dotnet` CLI commands, or use Visual Studio 2017, or use Visual 
 
 # Benchmark Guide and Results
 * Solution strucutered under two solution folders, Akka.Net and Proto.Actor. 
-* All benchmarks were run on a computer with Intel i7-6700HQ @ 2.6 GHz and 16 RAM configurations.
+* All benchmarks were run on a computer with Intel i7-6700HQ @ 2.6 GHz and 16 GB RAM configuration.
 * Benchmark settings are separated into sections in the `benchmark-settings.json` file that added as link to all benchmark projects. Changes made in this file apply to both the Akka.Net and Proto.Actor benchmarks for the same benchmark.
 * There is also seperate .hocon files for Akka.Net benchmarks.
 
@@ -177,3 +177,67 @@ Is Server GC False
 | 900        | 153     | 104,575,163 |
 
 Avg Msg/sec : 99,640,941.5555556
+
+## Remote Benchmark Guide (Adapted from Proto.Actor repository)
+This benchmark is adaptation of ping pong benchmark to the remote. The Benchmarks were prepared for both Proto.Actor and Akka.Net using both Google.Protobuff and Wire serializers. Hyperion serializer (fork of the Wire serializer) for Akka.Net, was used.
+
+Within the Messages project there are both common messages and their Protobuf generated versions. All Protobuf messages are automatically generated on the prebuild event of the Messages project.
+
+In the `benchmark-settings.json` file you can change the message count (that will send between nodes) and the ip and port values for Node1, Node2. For Akka.Net you also need to change ip and ports from hocon files for Node1 and Node2.
+
+```javascript
+"RemoteBenchmarkSettings": {
+  "MessageCount": 300000,
+  "Node1Ip": "127.0.0.1",
+  "Node2Ip": "127.0.0.1",
+  "Node1Port": 8090,
+  "Node2Port": 8091
+}
+```
+
+In order to switch to Protobuff serializer in Akka.Net benchmarks, You need to comment the line `using ActorModelBenchmarks.Messages;` and uncomment the line `using ActorModelBenchmarks.Messages.Protobuf;` inside Program.cs for both Node1 and Node2.
+
+You need to do the same think for the Proto.Actor benchmarks, additionally you need to replace the `SwitchToWire` method with the `SwitchToProtobuf` method inside Program.cs for both Node1 and Node2.
+
+### Akka.Net Results with Hyperion serializer (fork of the Wire serializer)
+Elapsed 00:00:07.0944259 <br />
+Throughput 84,573.4395506196 msg / sec
+
+### Proto.Actor Results with Wire serializer
+Elapsed 00:00:00.5927615 <br />
+Throughput 1,012,211.48809428 msg / sec
+
+### Akka.Net Results with Google.Protobuff
+Elapsed 00:00:06.7227722 <br />
+Throughput 89,248.8964597075 msg / sec
+
+### Proto.Actor Results with Google.Protobuff
+Elapsed 00:00:00.2773321 <br />
+Throughput 2,163,471.15966742 msg / sec
+
+All these results were observed in the local environment (127.0.0.1). To make the benchmarks a bit more realistic, Node2 of both Akka.Net and Proto.actor has moved a Lubuntu 17.10 virtual machine with 2.6 GHz four core 2 GB RAM configuration on VMWare and benchmarks were repeated.
+
+### Akka.Net Results with Hyperion serializer (fork of the Wire serializer)
+Elapsed 00:00:17.1707912 <br />
+Throughput 34,943.0607484179 msg / sec
+
+### Proto.Actor Results with Wire serializer
+Elapsed 00:00:09.3672863 <br />
+Throughput 64,052.7022217737 msg / sec
+
+### Akka.Net Results with Google.Protobuff
+Elapsed 00:00:16.3266224 <br />
+Throughput 36,749.7933926615 msg / sec
+
+### Proto.Actor Results with Google.Protobuff
+Elapsed 00:00:08.3608386 <br />
+Throughput 71,763.1362959213 msg / sec
+
+On the remote Proto.Actor is still twice as fast, but it has not reached million msg/sec like it was in the local environment. 
+
+Also, if you set the logging level to WARNING on Akka.Net, you get a warning as follows;
+
+``` 
+[WARNING][3/1/2018 5:38:45 PM][Thread 0013][[akka://remote-sys/system/endpointManager/reliableEndpointWriter-akka.tcp%3A%2F%2Fremote-sys%40192.168.135.128%3A8091-1/endpointWriter#1364445640]] [143971] buffered messages in EndpointWriter for [akka.tcp://remote-sys@192.168.135.128:8091]. You should probably implement flow control to avoid flooding the remote connection.
+``` 
+Messages are being buffered. You can tweak the DotNetty pool-size, `socket-worker-pool` values to achieve different results.
